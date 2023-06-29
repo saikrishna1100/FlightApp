@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% load static crispy_forms_tags %}
+{% load static base_extras.py %}
+{% block content%}
+<div class="container">
+    <h2>Bookings</h2>
+    <div>
+        {% for ticket in tickets %}
+        <div class="card p-2 my-2">
+            <ul>
+                <li>Origin: {{flight.origin}}</li>
+                <li>Destination: {{flight.destination}}</li>
+                <li>Airline: {{flight.airline}}</li>
+                <li>Fare: {{flight.fare}}</li>
+                <li>Seats: {{flight.fare}}</li>
+            </ul>
+            <div>
+                <a href="{% url 'flights'  %}" class="btn bnt-dark">Back</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

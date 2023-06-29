@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% load static crispy_forms_tags %}
+{% block content%}
+<div class="container col-4 my-5">
+    <h1>Book Ticket</h1>
+    <form action="{% url 'book_flight' id %}" method="post">
+        {% csrf_token %}
+        {{form|crispy}}
+        <p class="text-muted">If you want to add a new passengers, add <a href="{% url 'add_passenger' %}">here</a></p>
+        <input type="submit" class="btn btn-danger w-100" value="Book" />
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% load static crispy_forms_tags %}
+{% block content%}
+<div class="container col-6">
+    <h2>Add Flight</h2>
+    <form action="{% url 'add_flight' %}" method="post">
+        {% csrf_token %}
+        {{form|crispy}}
+        <input type="submit" class="btn btn-primary w-100" value="Add" />
+    </form>
+</div>
+{% endblock %}

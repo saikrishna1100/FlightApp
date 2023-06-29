@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% load static crispy_forms_tags %}
+{% load static base_extras.py %}
+{% block content%}
+<div class="container">
+    <h2>Flights</h2>
+    <div>
+        {% for flight in flights %}
+        <div class="card p-2 my-2">
+            <ul>
+                <li>Origin: {{flight.origin}}</li>
+                <li>Destination: {{flight.destination}}</li>
+                <li>Departure Day:
+                    {% for day in flight.departure_day.all %}
+                    {{day.name}}
+                    {% endfor %}
+                </li>
+                <li>Departure Time: {{flight.departure_time}}</li>
+                <li>Arrival Time: {{flight.arrival_time}}</li>
+                <li>Airline: {{flight.airline}}</li>
+                <li>Plane: {{flight.plane}}</li>
+                <li>Fare: {{flight.fare}}</li>
+                <li>Avilable Seats: {{flight.seats}}</li>
+            </ul>
+            <div>
+                {% if request.user|has_group:"admin" %}
+                <a href="{% url 'view_bookings' flight.id  %}" class="btn btn-info"> Show bookings</a>
+                <a href="{% url 'delete_flight' flight.id %}" class="btn btn-danger">Delete</a>
+                {% else %}
+                <a href="{% url 'book_flight' flight.id %}" class="btn btn-warning">Book Seat</a>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
